@@ -1,4 +1,5 @@
 from src.activation_function import ActivationFunction
+
 activation_function = ActivationFunction()
 
 class ForwardPropagation:
@@ -8,22 +9,26 @@ class ForwardPropagation:
     It uses ReLU for hidden layers and softmax for final output layer as activation function
     """
 
+    def forward_propagation(self, weights, biases, X):
 
-    def forward_propagation(self, parameters, X):
-        layer_outputs = {"A0": X}  # Input layer
+        l = len(weights)
+        p = {}
 
-        for i, (key, value) in enumerate(parameters.items(), start=1):
-            if key.startswith("W"):
-                # Extract the layer index from the key
-                layer_index = int(key[1:])
-                W = value
-                b = parameters[f"b{layer_index}"]
+        for i in range(1, l+1):
 
-                Z = W.dot(layer_outputs[f"A{layer_index - 1}"]) + b
-                A = activation_function.ReLU(Z) if i < len(parameters) // 2 else activation_function.Softmax(Z)
+            if i == 1 :
 
-                layer_outputs[f"Z{layer_index}"] = Z
-                layer_outputs[f"A{layer_index}"] = A
+                p[f"Z{i}"] = weights['W1'].dot(X) + biases['b1']
+                p[f"A{i}"] = activation_function.ReLU( weights['W1'].dot(X) + biases['b1'])
 
-        return layer_outputs
+            elif i > 1 and i < l:
 
+                p[f"Z{i}"] = weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"]
+                p[f"A{i}"] = activation_function.ReLU(weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"])
+
+            elif i == l:
+                
+                p[f"Z{i}"] = weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"]
+                p[f"A{i}"] = activation_function.Softmax(weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"])
+
+        return p

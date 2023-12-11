@@ -1,16 +1,19 @@
 class UpdateParameters:
 
     """
-    Use the cost function to update weights and biases
+    This class defines the cost function to update weights and biases of our neural network
     """
 
-    def update_parameters(self, parameters, gradients, learning_rate):
-        updated_parameters = {}
+    def update_parameters(self, weights, biases, s, alpha):
 
-        num_layers = len(parameters) // 2
+        p1 = {}
+        p2 = {}
 
-        for i in range(1, num_layers + 1):
-            updated_parameters[f"W{i}"] = parameters[f"W{i}"] - learning_rate * gradients[f"dW{i}"]
-            updated_parameters[f"b{i}"] = parameters[f"b{i}"] - learning_rate * gradients[f"db{i}"]
+        l = len(weights)
 
-        return updated_parameters
+        for i in range(1, l + 1):
+
+            p1[f"W{i}"] = weights[f"W{i}"] - alpha * s[f"dW{i}"]
+            p2[f"b{i}"] = biases[f"b{i}"] - alpha * s[f"db{i}"]
+
+        return p1, p2

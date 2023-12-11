@@ -3,13 +3,14 @@ import numpy as np
 class ParameterInitialization:
 
     """
-    This function initializes random values for initial weights and biases of our neural network
-    There will be a input layer, two hidden layer with 300 and 100 neurons and output layer with 10 neurons representing mnist digits
+    This Class initializes random values for initial weights and biases of our neural network
     """
 
     def __init__(self, input_size, hidden_layers, n_neurons, n_classes):
         """
         input_size is the number of features or columns
+        hidden_layers is the number of hidden layers of the network
+        n_neurons is the number of neurons for the hidden layers
         n_classes is the number of class labels
         """
         self.input_size = input_size
@@ -19,22 +20,24 @@ class ParameterInitialization:
 
     def initialize_parameters(self):
 
-        parameters = {}
+        weights = {}
+        biases = {}
+
 
         for i in range(self.hidden_layers):
 
             if i == 0:
                 #For the first hidden layer
-                parameters[f"W{i + 1}"] = np.random.rand(self.n_neurons, self.input_size) - 0.5
-                parameters[f"b{i + 1}"] = np.random.rand(self.n_neurons, 1) - 0.5
+                weights[f"W{i + 1}"] = np.random.rand(self.n_neurons, self.input_size) - 0.5
+                biases[f"b{i + 1}"] = np.random.rand(self.n_neurons, 1) - 0.5
             else:
                 # For rest of the hidden layers
-                parameters[f"W{i + 1}"] = np.random.rand(self.n_neurons, self.n_neurons) - 0.5
-                parameters[f"b{i + 1}"] = np.random.rand(self.n_neurons, 1) - 0.5
+                weights[f"W{i + 1}"] = np.random.rand(self.n_neurons, self.n_neurons) - 0.5
+                biases[f"b{i + 1}"] = np.random.rand(self.n_neurons, 1) - 0.5
 
         #For final output layer
-        parameters[f"W{self.hidden_layers + 1}"] = np.random.rand(self.n_classes, self.n_neurons) - 0.5
-        parameters[f"b{self.hidden_layers + 1}"] = np.random.rand(self.n_classes, 1) - 0.5
+        weights[f"W{self.hidden_layers + 1}"] = np.random.rand(self.n_classes, self.n_neurons) - 0.5
+        biases[f"b{self.hidden_layers + 1}"] = np.random.rand(self.n_classes, 1) - 0.5
 
-        return parameters
+        return weights, biases
 

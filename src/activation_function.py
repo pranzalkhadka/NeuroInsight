@@ -24,9 +24,9 @@ class ActivationFunction:
 
         A = np.exp(Z) / sum(np.exp(Z))
         return A
-
-        # exp_Z = np.exp(Z - np.max(Z, axis=0, keepdims=True))
-        # A = exp_Z / np.sum(exp_Z, axis=0, keepdims=True)
+    
+        # Z = np.float128(Z)
+        # A = np.exp(Z) / sum(np.exp(Z))
         # return A
     
 
