@@ -28,6 +28,13 @@ class ActivationFunction:
         # Z = np.float128(Z)
         # A = np.exp(Z) / sum(np.exp(Z))
         # return A
+
+
+    def Linear(self, Z):
+        """
+        Linear activation function for regression problem
+        """
+        return Z
     
 
     def derivative_ReLU(self, Z):
@@ -37,5 +44,12 @@ class ActivationFunction:
         If any element in Z is greater than 0 , return 1 otherwise 0
         """
 
-        return Z > 0
+        # return Z > 0
+        return np.where(Z > 0, 1, 0)
+
+    
+    def derivative_linear(self, Z):
+
+        return 1
+
     

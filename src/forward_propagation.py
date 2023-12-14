@@ -9,7 +9,7 @@ class ForwardPropagation:
     It uses ReLU for hidden layers and softmax for final output layer as activation function
     """
 
-    def forward_propagation(self, weights, biases, X):
+    def forward_propagation(self, weights, biases, X, n_classes):
 
         l = len(weights)
         p = {}
@@ -29,6 +29,9 @@ class ForwardPropagation:
             elif i == l:
                 
                 p[f"Z{i}"] = weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"]
-                p[f"A{i}"] = activation_function.Softmax(weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"])
+                if n_classes == 1:
+                    p[f"A{i}"] = activation_function.Linear(weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"])
+                else:
+                    p[f"A{i}"] = activation_function.Softmax(weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"])
 
         return p
