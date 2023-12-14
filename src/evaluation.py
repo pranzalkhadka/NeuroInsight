@@ -1,7 +1,11 @@
 import numpy as np
-from src.forward_propagation import ForwardPropagation
+from src.forward_propagation import ForwardPropagationForClassification
+# from src.forward_propagation import ForwardPropagationForRegression
 
-forward_propagation = ForwardPropagation()
+
+forward_propagation = ForwardPropagationForClassification()
+# forward_propagation = ForwardPropagationForRegression()
+
 
 class Evaluation:
 
@@ -22,7 +26,7 @@ class Evaluation:
     
     
     def validation_predictions(self, X, weights, biases):
-        forward_output = forward_propagation.forward_propagation(weights, biases, X, self.n_classes)
+        forward_output = forward_propagation.forward_propagation_classification(weights, biases, X, self.n_classes)
         key, value = list(forward_output.items())[-1]
         prediction = self.predictions(value)
         return prediction
