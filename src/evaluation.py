@@ -32,6 +32,8 @@ class Evaluation:
         return prediction
     
 
-    def mean_squared_error(self, Y_predicted, Y):
-        Y_predicted = Y_predicted.reshape(Y.shape)
-        return np.mean((Y_predicted - Y)**2)
+    def root_mean_squared_error(self, Y_predicted, Y):
+        # Y_predicted = Y_predicted.reshape(Y.shape)
+        mse = np.mean((Y_predicted - Y)**2)
+        rmse = np.sqrt(mse)
+        return rmse
