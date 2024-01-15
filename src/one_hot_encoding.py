@@ -3,7 +3,7 @@ import numpy as np
 class OneHotEncoding:
     
     """
-    This class performs One hot Encoding on our label
+    This class is used for classification problems to perform One hot Encoding on the label
     """
 
     def one_hot_encoding(self, Y):

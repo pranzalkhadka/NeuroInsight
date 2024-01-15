@@ -2,7 +2,7 @@ import numpy as np
 
 class ActivationFunction:
     """
-    This class defines the activation functions to be used in the neural network
+    This class defines the activation functions used in the neural network
     """
 
     def ReLU(self, Z):
@@ -24,10 +24,6 @@ class ActivationFunction:
 
         A = np.exp(Z) / sum(np.exp(Z))
         return A
-    
-        # Z = np.float128(Z)
-        # A = np.exp(Z) / sum(np.exp(Z))
-        # return A
 
 
     def Linear(self, Z):
@@ -44,12 +40,7 @@ class ActivationFunction:
         If any element in Z is greater than 0 , return 1 otherwise 0
         """
 
-        # return Z > 0
-        return np.where(Z > 0, 1, 0)
+        return Z > 0
 
-    
-    def derivative_linear(self, Z):
-
-        return 1
 
     

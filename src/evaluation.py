@@ -1,7 +1,10 @@
 import numpy as np
 
 from src.forward_propagation import ForwardPropagationForClassification
-forward_propagation = ForwardPropagationForClassification()
+forward_propagation_c = ForwardPropagationForClassification()
+
+from src.forward_propagation import ForwardPropagationForRegression
+forward_propagation_r = ForwardPropagationForRegression()
 
 
 class Evaluation:
@@ -19,15 +22,26 @@ class Evaluation:
         return np.sum(predictions == Y) / Y.size
     
     
-    def validation_predictions(self, X, weights, biases):
-        forward_output = forward_propagation.forward_propagation_classification(weights, biases, X)
+    def classification_validation_predictions(self, X, weights, biases):
+        forward_output = forward_propagation_c.forward_propagation_classification(weights, biases, X)
         key, value = list(forward_output.items())[-1]
         prediction = self.predictions(value)
         return prediction
     
 
+    def regression_validation_predictions(self, weights, biases, X, Y):
+        forward_output_val = forward_propagation_r.forward_propagation_regression(weights, biases, X)
+        key, value = list(forward_output_val.items())[-1]
+        Y_val_predicted = value.flatten()
+        rmse_val = self.root_mean_squared_error(Y_val_predicted, Y)
+        return rmse_val
+
+
+    def mean_squared_error(self, Y_predicted, Y):
+        return np.mean((Y_predicted - Y)**2)
+
+
     def root_mean_squared_error(self, Y_predicted, Y):
-        # Y_predicted = Y_predicted.reshape(Y.shape)
-        mse = np.mean((Y_predicted - Y)**2)
+        mse = self.mean_squared_error(Y_predicted, Y)
         rmse = np.sqrt(mse)
         return rmse

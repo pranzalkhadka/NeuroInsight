@@ -1,6 +1,6 @@
 from src.activation_function import ActivationFunction
-
 activation_function = ActivationFunction()
+
 
 class ForwardPropagationForClassification:
     
@@ -62,7 +62,6 @@ class ForwardPropagationForRegression:
             elif i == l:
                 
                 p[f"Z{i}"] = weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"]
-                p[f"A{i}"] = activation_function.Linear(weights[f"W{i}"].dot(p[f"A{i-1}"]) + biases[f"b{i}"])
-
+                p[f"A{i}"] = activation_function.Linear(p[f"Z{i}"])
 
         return p
