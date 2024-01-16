@@ -1,4 +1,4 @@
-from src.activation_function import ActivationFunction
+from NeuroInsight.activation_function import ActivationFunction
 activation_function = ActivationFunction()
 
 

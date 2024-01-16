@@ -1,9 +1,9 @@
 import numpy as np
 
-from src.activation_function import ActivationFunction
+from NeuroInsight.activation_function import ActivationFunction
 activation_function = ActivationFunction()
 
-from src.one_hot_encoding import OneHotEncoding
+from NeuroInsight.one_hot_encoding import OneHotEncoding
 onehotencoding = OneHotEncoding()
 
 class BackPropagationForClassification:

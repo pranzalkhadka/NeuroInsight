@@ -1,9 +1,9 @@
 import numpy as np
 
-from src.forward_propagation import ForwardPropagationForClassification
+from NeuroInsight.forward_propagation import ForwardPropagationForClassification
 forward_propagation_c = ForwardPropagationForClassification()
 
-from src.forward_propagation import ForwardPropagationForRegression
+from NeuroInsight.forward_propagation import ForwardPropagationForRegression
 forward_propagation_r = ForwardPropagationForRegression()
 
 
